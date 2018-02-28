@@ -1,0 +1,20 @@
+%pyspark
+#1 READ FILE FROM STORAGE
+SensorDataRDD= sc.textFile('s3://hou-sysco/stack-overflow-analytics/2016StackOverflowSurveyResponses.csv')
+
+#2 RDD Count Action
+SensorDataCount = SensorDataRDD.count()
+SensorDataCount
+
+from pyspark.sql.types import StructType
+from pyspark.sql.types import StructField
+from pyspark.sql.types import StringType
+
+#Converting RDD to a DataFrame
+schema = StructType([StructField(str(i), StringType(), True) for i in range(32)])
+
+df = sqlContext.createDataFrame(SensorDataRDD, schema)
+
+#PrintSchema is not working well because it is pringing number only 0/31 sequentially, not headers
+df.printSchema()
+
