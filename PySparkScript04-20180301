@@ -1,0 +1,29 @@
+BACKUP 2018_03_01
+
+%pyspark
+#from pyspark.sql import SQLContext
+#sqlContext = SQLContext(sc)
+
+import csv
+#df=spark.read.csv('s3://hou-sysco/stack-overflow-analytics/2016StackOverflowSurveyResponses.csv',inferSchema='true',header='true')
+
+#df2=spark.read.csv('s3://hou-sysco/stack-overflow-analytics/2016SSurvey3cols.csv',inferSchema='true',header='true')
+
+
+#df2.first()
+
+#works-CREATES A NEW TABLE WITH THE DESIRED STRUCTURE
+
+
+#sqlContext.sql("CREATE TABLE Survey2Hive (id int, country string, gender string,salary_midpoint	int,industry string)   ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TextFile")
+
+#works-SAVES DATAFRAME into a hive table(DFs)
+
+#WORKS df2.write.saveAsTable("Survey3Hive")
+
+# This overwrites in case of an existing table
+#df2.write.mode("overwrite").saveAsTable("Survey2Hive")
+
+#df2.count()
+
+df2.filter(df2['salary_midpoint'] > 55000).show()
